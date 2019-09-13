@@ -75,3 +75,22 @@ To get a baseline sense of expected behaviour, let's look at boolean-case surviv
 >>> survived / len(passengers)
 0.3838383838383838
 ```
+### proto-model
+
+The `BasicTree` is the rudimentary proto-structure for the `DecisionTree`. We aren't creating and evaluating a decision tree here, but rather verifying the foundational integrity of our process.
+
+```python
+>>> from models.basic import BasicTree
+>>>
+>>> dt = BasicTree()
+>>> dt.fit_data(data=train, target='Survived')
+>>>
+>>> # we expect
+>>> predictions = dt.predict(test)
+>>> predictions[:3]
+array([[0.61616162, 0.38383838],
+       [0.61616162, 0.38383838],
+       [0.61616162, 0.38383838]])
+```
+
+We receive the reassuring but useless projection of a `0.38383838` survival rate for our test data, indicating that the training data probabilities have been processed correctly.
