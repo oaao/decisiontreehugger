@@ -15,7 +15,7 @@ Start by establishing training and test data:
 >>> test  = pandas.read_csv('./example_data/titanic_test_preprocessed.csv')
 ```
 
-<details><summary>ex. train output</summary>
+<details><summary>→ expand to view example train output</summary>
 
 <p>
 
@@ -40,7 +40,7 @@ Start by establishing training and test data:
 </p>
 </details>
 
-<details><summary>ex.  test output</summary>
+<details><summary>→ expand to view example test output</summary>
 
 <p>
 
@@ -98,7 +98,7 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 
 ### decision tree
 
-<details><summary>Feel free to expand and read for context on the design parametrisation of the decision tree. Otherwise, let's get going:</summary>
+<details><summary>→ Expand this to read context on the design parametrisation of the decision tree.</summary>
 
 <p>
 
@@ -108,8 +108,36 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
     * bottom-layer nodes do not have branches
 
 **considerations:**
-    * ideally, prioritise the most 'efficient' conditions at the top of the tree
+    * prioritise the most 'efficient' conditions at the top of the tree
     * branches can be recursively implemented decision trees rather than separately articulated
+    * how do we create the tree to have optimal splits?
+        + *ideal split*: an *ideal* split in binary classification produces homogenous branches
+        + *impurity*: homogeneity is unrealistic - how can we decrease impurity in child node w.r.t. parent node?
+            - Gini impurity
+            - cross-entropy / information gain (logarithmic calculation)
 
 </p>
 </details>
+
+<details><summary>→ Expand this to read how splitting behaviour is refined. *Includes brief explanations of the calculation approaches for predicted impurity/misclassifaction rate.*</summary>
+
+
+**Gini impurity:**
+
+<img src="https://i.imgur.com/VzImiiu.png" />
+
+> where `k` is the number of cases in the target attribute, and `p` is the probability of a given case existing at that node
+
+**information gain:**
+
+<img src="https://i.imgur.com/cpHogrY.png" />
+
+> where `k` is the number of cases in the target attribute, `r` is the row count in the node, and `R` is the row count for the entire dataset
+
+</details>
+
+## references
+
+* Victor Zhou (2019): [A Simple Explanation of Gini Impurity](https://victorzhou.com/blog/gini-impurity/)
+
+* [@amro](https://stackoverflow.com/users/97160/amro) via SO (2009): [ans: What is "entropy and information gain?"](https://stackoverflow.com/a/1859910)
