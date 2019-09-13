@@ -94,3 +94,22 @@ array([[0.61616162, 0.38383838],
 ```
 
 We receive the reassuring but useless projection of a `0.38383838` survival rate for our test data, indicating that the training data probabilities have been processed correctly.
+
+
+### decision tree
+
+<details><summary>Feel free to expand and read for context on the design parametrisation of the decision tree. Otherwise, let's get going:</summary>
+
+<p>
+
+**properties:**
+    * contains a root node
+    * each node may have a left and right branch
+    * bottom-layer nodes do not have branches
+
+**considerations:**
+    * ideally, prioritise the most 'efficient' conditions at the top of the tree
+    * branches can be recursively implemented decision trees rather than separately articulated
+
+</p>
+</details>
