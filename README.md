@@ -122,9 +122,9 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 
     + *impurity*: homogeneity is unrealistic - how can we decrease impurity in child node w.r.t. parent node?
 
-    - Gini impurity
+        - Gini impurity
 
-    - cross-entropy / information gain (logarithmic calculation)
+        - cross-entropy / information gain (logarithmic calculation)
 
 </p>
 </details>
