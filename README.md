@@ -15,7 +15,7 @@ Start by establishing training and test data:
 >>> test  = pandas.read_csv('./example_data/titanic_test_preprocessed.csv')
 ```
 
-<details><summary>→ expand to view example train output</summary>
+<details><summary>expand to view example train output</summary>
 
 <p>
 
@@ -40,7 +40,7 @@ Start by establishing training and test data:
 </p>
 </details>
 
-<details><summary>→ expand to view example test output</summary>
+<details><summary>expand to view example test output</summary>
 
 <p>
 
@@ -98,7 +98,7 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 
 ### decision tree
 
-<details><summary>→ Expand this to read context on the design parametrisation of the decision tree.</summary>
+<details><summary>Expand this to read context on the design parametrisation of the decision tree.</summary>
 
 <p>
 
@@ -119,7 +119,7 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 </p>
 </details>
 
-<details><summary>→ Expand this to read how splitting behaviour is refined. *Includes brief explanations of the calculation approaches for predicted impurity/misclassifaction rate.*</summary>
+<details><summary>Expand this to read how splitting behaviour is decided by calculation methods for impurity/misclassifaction rate.</summary>
 
 
 **Gini impurity:**
