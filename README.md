@@ -103,18 +103,28 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 <p>
 
 **properties:**
-    * contains a root node
-    * each node may have a left and right branch
-    * bottom-layer nodes do not have branches
+
+* contains a root node
+
+* each node may have a left and right branch
+
+* bottom-layer nodes do not have branches
 
 **considerations:**
-    * prioritise the most 'efficient' conditions at the top of the tree
-    * branches can be recursively implemented decision trees rather than separately articulated
-    * how do we create the tree to have optimal splits?
-        + *ideal split*: an *ideal* split in binary classification produces homogenous branches
-        + *impurity*: homogeneity is unrealistic - how can we decrease impurity in child node w.r.t. parent node?
-            - Gini impurity
-            - cross-entropy / information gain (logarithmic calculation)
+
+* prioritise the most 'efficient' conditions at the top of the tree
+
+* branches can be recursively implemented decision trees rather than separately articulated
+
+* how do we create the tree to have optimal splits?
+
+    + *ideal split*: an *ideal* split in binary classification produces homogenous branches
+
+    + *impurity*: homogeneity is unrealistic - how can we decrease impurity in child node w.r.t. parent node?
+
+    - Gini impurity
+
+    - cross-entropy / information gain (logarithmic calculation)
 
 </p>
 </details>
