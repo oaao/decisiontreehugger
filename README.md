@@ -80,7 +80,7 @@ To get a baseline sense of expected behaviour, let's look at boolean-case surviv
 The `ProtoTree` is the rudimentary proto-model for the `DecisionTree`. We aren't creating and evaluating a decision tree here, but rather verifying the foundational integrity of our process.
 
 ```python
->>> from models.basic import ProtoTree
+>>> from models.base import ProtoTree
 >>>
 >>> dt = ProtoTree()
 >>> dt.fit_data(data=train, target='Survived')
