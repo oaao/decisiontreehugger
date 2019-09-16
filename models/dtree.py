@@ -7,6 +7,9 @@ class DecisionTree(ProtoTree):
     def __init__(self):
         super(ProtoTree, self).__init__()
 
+        self.criteria      = None
+        self.split_feature = None
+
         self.impurity_rate = 1
 
     def _gini_impurity(self, data):
@@ -22,17 +25,17 @@ class DecisionTree(ProtoTree):
 
     def _information_gain(self, feature, value):
 
-            left  = feature <= v
-            right = feature >  v
+            L = feature <= v
+            R = feature >  v
 
-            l_data, r_data = self.data[left], self.data[right]
+            L_data, R_data = self.data[L], self.data[R]
 
-            l_impurity = self._gini_impurity(l_data[self.target])
-            l_impurity = self._gini_impurity(r_data[self.target])
+            L_impurity = self._gini_impurity(L_data[self.target])
+            R_impurity = self._gini_impurity(R_data[self.target])
 
             gain = self.impurity_rate \
-                   - (len(l_data) / len(self.data)) * l_impurity \
-                   + (len(r_data) / len(self.data)) * r_impurity
+                   - (len(L_data) / len(self.data)) * L_impurity \
+                   + (len(R_data) / len(self.data)) * R_impurity
 
             return gain
 
@@ -71,3 +74,18 @@ class DecisionTree(ProtoTree):
                 best = {'split': split, 'feature': feature, 'gain': info_gain}
 
         return best['split'], best['feature']
+
+    def _branch(self):
+
+        self.L, self.R = DecisionTree(), DecisionTree()
+
+        L_rows = self.data[self.data[self.split_feature] <= self.criteria]
+        R_rows = self.data[self.data[self.split_feature] >  self.criteria]
+
+        self.L.fit(data=L_rows, target=self.target)
+        self.R.fit(data=R_rows, target=self.target)
+
+
+
+
+
