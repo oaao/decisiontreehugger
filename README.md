@@ -130,13 +130,56 @@ We receive the reassuring but useless projection of a `0.38383838` survival rate
 </details>
 
 <details><summary>Expand this to read how splitting behaviour is decided by calculation methods for impurity/misclassifaction rate.</summary>
+<p>
 
 
 **Gini impurity:**
 
+Randomly pick a "row" / data point; it has `k` value cases, each with a number of occurrences in the dataset. Based on the proportional distribution of a case and the `k` cases it could be randomly classified as, Gini impurity is the probability sum of all *incorrect* classification events.
+
+For example, assume we have received the following dataset of `Yes`, `No`, and `Maybe` votes for some proposition. This model has `k=3` cases for the sake of illustration; however, since decision trees involve binary classification, we would almost always be looking at features/attributes with `k=2` cases, whether natively or coerced as such.
+
+|           |   case   | count   | proportion |
+|-----------|:--------:|:-------:|:----------:|
+|           |  Yes     |   6     |     60%    |
+|           |   No     |   3     |     30%    |
+|           | Maybe    |   1     |     10%    |
+| **total** |  *(k=2)* |   *10*  |    *100%*  |
+
+Here, `proportion` also represents `probability`; i.e. we have a 10% chance of randomly selecting a `Maybe` case.
+
+Given the case distribution in our training data, we would e.g. randomly select `Yes` 60% of the time, and we would also randomly classify it as `Yes` 60% of the time. Therefore, the event probability of classifying `Yes` as `Yes` is `0.6 * 0.6 = 0.36`. The full series of classification event probabilities would be as follows:
+
+| randomly selected | selection probability | randomly classified as | classification event probability | correctness |
+|:-----------------:|-----------------------|:----------------------:|----------------------------------|:-----------:|
+|        Yes        | 0.6                   |           Yes          | `0.6 * 0.6 =` 0.36               |      ✅      |
+|        Yes        | 0.6                   |           No           | `0.6 * 0.3 =` 0.18               |      ❌      |
+|        Yes        | 0.6                   |          Maybe         | `0.6 * 0.1 =` 0.06               |      ❌      |
+|         No        | 0.3                   |           Yes          | `0.3 * 0.6 =` 0.18               |      ❌      |
+|         No        | 0.3                   |           No           | `0.3 * 0.3 =` 0.09               |      ✅      |
+|         No        | 0.3                   |           Maybe        | `0.3 * 0.1 =` 0.03               |      ❌      |
+|         Maybe     | 0.1                   |           Yes          | `0.1 * 0.6 =` 0.06               |      ❌      |
+|         Maybe     | 0.1                   |           No           | `0.1 * 0.3 =` 0.03               |      ❌      |
+|         Maybe     | 0.1                   |           Maybe        | `0.1 * 0.1 =` 0.01               |      ✅      |
+
+The *Gini impurity* would be the sum of all incorrect classification event probabilities:
+
+`0.18 + 0.06 + 0.18 + 0.03 + 0.06 + 0.03` = **0.54**
+
+Canonically, it is expressed by the following equation:
+
 <img src="https://i.imgur.com/VzImiiu.png" />
 
 > where `k` is the number of cases in the target attribute, and `p` is the probability of a given case existing at that node
+
+So, let's test whether our event table and the Gini impurity equation yield the same result:
+
+```
+G = p(1)*(1 - p(1)) + p(2)*(1 - p(2)) + p(3)*(1 - p(3))
+  = (0.6)*(1 - 0.6) + (0.3)*(1 - 0.3) + (0.1)*(1 - 0.1)
+  = 0.54
+```
+
 
 **information gain:**
 
