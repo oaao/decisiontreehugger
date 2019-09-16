@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class BasicTree:
+class ProtoTree:
 
     def _get_independent(self, data, target):
         """

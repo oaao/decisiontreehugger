@@ -77,12 +77,12 @@ To get a baseline sense of expected behaviour, let's look at boolean-case surviv
 ```
 ### proto-model
 
-The `BasicTree` is the rudimentary proto-model for the `DecisionTree`. We aren't creating and evaluating a decision tree here, but rather verifying the foundational integrity of our process.
+The `ProtoTree` is the rudimentary proto-model for the `DecisionTree`. We aren't creating and evaluating a decision tree here, but rather verifying the foundational integrity of our process.
 
 ```python
->>> from models.basic import BasicTree
+>>> from models.basic import ProtoTree
 >>>
->>> dt = BasicTree()
+>>> dt = ProtoTree()
 >>> dt.fit_data(data=train, target='Survived')
 >>>
 >>> # we expect the aforementioned survival rate, consistent to all rows:
@@ -172,6 +172,7 @@ So, let's test whether our event table and the Gini impurity equation yield the 
 G = p(1)*(1 - p(1)) + p(2)*(1 - p(2))
   = (0.6)*(1 - 0.6) + (0.4)*(1 - 0.4)  = 0.48
 ```
+
 
 **information gain:**
 
