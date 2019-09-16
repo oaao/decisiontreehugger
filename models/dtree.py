@@ -35,3 +35,39 @@ class DecisionTree(ProtoTree):
                    + (len(r_data) / len(self.data)) * r_impurity
 
             return gain
+
+    def _best_split_per_feature(self, attr):
+
+        feature = self.data[attr]
+        uniques = feature.unique()
+
+        info_gain = None
+        split     = None
+
+        if len(uniques) == 1:
+            return info_gain, split
+
+        for value in uniques:
+            potential_gain = self._information_gain(feature, value)
+
+            if not info_gain or potential_gain > info_gain:
+                info_gain = potential_gain
+                split     = value
+
+        return info_gain, split
+
+
+    def _best_split(self):
+
+        best = {}
+
+        for feature in self.independent:
+
+            info_gain, split = self._best_split_per_feature(feature)
+
+            if not split:
+                continue
+            if not split or split['gain'] < info_gain:
+                best = {'split': split, 'feature': feature, 'gain': info_gain}
+
+        return best['split'], best['feature']
