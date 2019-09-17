@@ -5,7 +5,6 @@ from .base import ProtoTree
 class DecisionTree(ProtoTree):
 
     def __init__(self, max_depth=4, depth=1):
-        super(ProtoTree, self).__init__()
 
         self.L = None
         self.R = None
@@ -16,7 +15,7 @@ class DecisionTree(ProtoTree):
         self.criteria      = None
         self.split_feature = None
 
-        self.impurity_rate = 1
+        self.impurity = 1
 
     def _gini_impurity(self, data):
 
@@ -27,6 +26,7 @@ class DecisionTree(ProtoTree):
 
         # binary classification means two resultant probabilities whose sum is 1; p*(1-p) is identical for both cases
         # therefore, we can simply double the value of one case
+        print(p)
         return 2 * p * (1 - p)
 
     def _information_gain(self, feature, value):
@@ -92,7 +92,48 @@ class DecisionTree(ProtoTree):
         self.L.fit(data=L_rows, target=self.target)
         self.R.fit(data=R_rows, target=self.target)
 
+    def _validate(self):
 
+        non_numeric = self.data[self.independent].select_dtypes(
+            include=['category', 'object', 'bool']
+        ).columns.tolist()
+
+        if len(set(self.independent)).intersection(set(non_numeric)) != 0:
+            raise RuntimeError('all data features must be numeric')
+
+        self.data[self.target] = self.data[self.target].astype('category')
+
+        if len(self.data[self.target]).cat.categories != 2:
+            raise RuntimeError('binary implementation only: data features must have <= 2 cases each')
+
+    def fit(self, data, target):
+        """
+        Derive and self-assign (training) data, target attribute, and independent attribute names.
+
+        data:   pandas.core.frame.DataFrame
+        target: string
+        """
+
+        if self.depth <= self.max_depth:
+            print(f'processing at depth: {self.depth}')
+
+        self.data   = data
+        self.target = target
+
+        self.independent = self._get_independent(data, target)
+
+        if self.depth <= self.max_depth:
+
+            #self._validate()
+
+            self.impurity = self._gini_impurity(self.data[self.target])
+
+            self.criteria, self.split_feature, self.info_gain = self._best_split()
+
+            if self.criteria is not None and self.info_gain > 0:
+                self._branch()
+        else:
+            print('Branching ends; max depth has been reached')
 
 
 
