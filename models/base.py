@@ -24,7 +24,7 @@ class ProtoTree:
         """
         return self.data[self.target].value_counts().apply(lambda x: x/len(self.data)).tolist()
 
-    def fit_data(self, data, target):
+    def fit(self, data, target):
         """
         Derive and self-assign (training) data, target attribute, and independent attribute names.
 

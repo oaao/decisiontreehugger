@@ -83,7 +83,7 @@ The `ProtoTree` is the rudimentary proto-model for the `DecisionTree`. We aren't
 >>> from models.base import ProtoTree
 >>>
 >>> dt = ProtoTree()
->>> dt.fit_data(data=train, target='Survived')
+>>> dt.fit(data=train, target='Survived')
 >>>
 >>> # we expect the aforementioned survival rate, consistent to all rows:
 >>> predictions = dt.predict(test)
