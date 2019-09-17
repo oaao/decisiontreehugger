@@ -19,7 +19,7 @@ class DecisionTree(ProtoTree):
 
     def _gini_impurity(self, data):
 
-        if data.empty or not data:
+        if data.empty:
             return 0
 
         p = data.value_counts().apply(lambda x: x/len(self.data)).tolist()
