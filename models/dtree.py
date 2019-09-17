@@ -7,6 +7,9 @@ class DecisionTree(ProtoTree):
     def __init__(self):
         super(ProtoTree, self).__init__()
 
+        self.L = None
+        self.R = None
+
         self.criteria      = None
         self.split_feature = None
 
