@@ -4,11 +4,14 @@ from .base import ProtoTree
 
 class DecisionTree(ProtoTree):
 
-    def __init__(self):
+    def __init__(self, max_depth=4, depth=1):
         super(ProtoTree, self).__init__()
 
         self.L = None
         self.R = None
+
+        self.max_depth = max_depth
+        self.depth     = depth
 
         self.criteria      = None
         self.split_feature = None
@@ -80,7 +83,8 @@ class DecisionTree(ProtoTree):
 
     def _branch(self):
 
-        self.L, self.R = DecisionTree(), DecisionTree()
+        self.L = DecisionTree(max_depth=self.max_depth, depth=self.depth+1)
+        self.R = DecisionTree(max_depth=self.max_depth, depth=self.depth+1)
 
         L_rows = self.data[self.data[self.split_feature] <= self.criteria]
         R_rows = self.data[self.data[self.split_feature] >  self.criteria]
