@@ -12,7 +12,10 @@ class ProtoTree:
 
         -> return: list
         """
-        return data.columns.tolist().remove(target)
+        features = data.columns.tolist()
+        features.remove(target)
+
+        return features
 
     def _pass_through_tree(self, row):
         """
